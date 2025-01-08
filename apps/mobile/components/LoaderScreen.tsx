@@ -217,18 +217,19 @@ function NoWallet({ proceedWithoutWallet }: { proceedWithoutWallet: () => void }
 
             </ScrollView>
 
-            <Button variant="plain" className="flex-row items-center justify-start gap-2 flex-1 w-full mt-5" onPress={() => setNutzaps(!nutzaps)}>
-                <Checkbox checked={nutzaps} />
-                <Text className="text-white font-medium">
-                    Enable Nutzaps
-                </Text>
-            </Button>
-
+            <View className="flex-col justify-center flex-1 w-full">
+              <Button variant="plain" className="flex-row items-center justify-start gap-2 flex-1 w-full mt-5" onPress={() => setNutzaps(!nutzaps)}>
+                  <Checkbox checked={nutzaps} />
+                  <Text className="text-white font-medium">
+                      Enable Nutzaps
+                  </Text>
+              </Button>
+            </View>
             <View className="flex-col items-center justify-center flex-1 w-full">
                 {mints.size > 0 ? (
                     <>
                     <Button variant="accent" className="mt-4 w-full !py-4" onPress={createWallet} state={state}>
-                        <Text className="text-white font-semibold">
+                        <Text className="text-white font-semibold w-full text-center">
                             Create wallet
                         </Text>
                     </Button>
