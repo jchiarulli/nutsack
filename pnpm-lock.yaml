@@ -403,7 +403,7 @@ importers:
         version: 9.0.7
       bun-types:
         specifier: latest
-        version: 1.1.42
+        version: 1.1.43
 
   apps/web:
     dependencies:
@@ -984,6 +984,24 @@ importers:
       tsup:
         specifier: ^7.2.0
         version: 7.3.0(postcss@8.4.49)(ts-node@10.9.2(@types/node@18.19.64)(typescript@5.6.3))(typescript@5.6.3)
+
+  packages/ndk/packages/eslint-config:
+    dependencies:
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^5.62.0
+        version: 5.62.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1)(typescript@5.7.2)
+      '@typescript-eslint/parser':
+        specifier: ^5.62.0
+        version: 5.62.0(eslint@8.57.1)(typescript@5.7.2)
+      eslint:
+        specifier: ^8.57.0
+        version: 8.57.1
+      eslint-config-universe:
+        specifier: ^12.1.0
+        version: 12.1.0(@types/eslint@8.56.12)(eslint@8.57.1)(prettier@3.3.3)(typescript@5.7.2)
+      prettier:
+        specifier: ^3.2.5
+        version: 3.3.3
 
   packages/ndk/packages/eslint-config-custom:
     dependencies:
@@ -5367,8 +5385,8 @@ packages:
   builtin-status-codes@3.0.0:
     resolution: {integrity: sha512-HpGFw18DgFWlncDfjTa2rcQ4W88O1mC8e8yZ2AvQY5KDaktSTwo+KRf6nHK6FRI5FyRyb/5T6+TSxfP7QyGsmQ==}
 
-  bun-types@1.1.42:
-    resolution: {integrity: sha512-beMbnFqWbbBQHll/bn3phSwmoOQmnX2nt8NI9iOQKFbgR5Z6rlH3YuaMdlid8vp5XGct3/W4QVQBmhoOEoe4nw==}
+  bun-types@1.1.43:
+    resolution: {integrity: sha512-W0wCtVH+bwFp7p3Zgs03CqxEDmXxEvmmUM/FBKgWIv9T8gyeotvIjIbHzuDScc2DphhRNtr7hJLCR5PspYL5qw==}
 
   bundle-require@4.2.1:
     resolution: {integrity: sha512-7Q/6vkyYAwOmQNRw75x+4yRtZCZJXUDmHHlFdkiV0wgv/reNjtJwpu1jPJ0w2kbEpIM0uoKI3S4/f39dU7AjSA==}
@@ -17857,7 +17875,7 @@ snapshots:
 
   builtin-status-codes@3.0.0: {}
 
-  bun-types@1.1.42:
+  bun-types@1.1.43:
     dependencies:
       '@types/node': 20.12.14
       '@types/ws': 8.5.13
