@@ -1,0 +1,5 @@
+{
+    "extends": "../packages/tsconfig/ndk-cache-dexie.json",
+    "include": ["src/**/*.d.ts", "src/**/*.js", "src/**/*.ts"],
+    "exclude": ["dist", "build", "node_modules"]
+}
