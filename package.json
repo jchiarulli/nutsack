@@ -1,48 +1,40 @@
 {
-    "private": true,
-    "scripts": {
-        "build": "turbo build",
-        "dev": "turbo dev --no-cache --continue",
-        "lint": "turbo lint",
-        "clean": "turbo clean && rm -rf node_modules",
-        "format": "turbo format",
-        "docs:dev": "vitepress dev docs",
-        "docs:build": "vitepress build docs",
-        "changeset": "changeset",
-        "version-packages": "changeset version",
-        "release": "turbo build --filter=docs^... && changeset publish",
-        "docs:preview": "vitepress preview"
-    },
-    "devDependencies": {
-        "@braintree/sanitize-url": "^7.1.0",
-        "@changesets/cli": "^2.22.0",
-        "@nostr-dev-kit/eslint-config-custom": "workspace:*",
-        "@nostr-dev-kit/tsconfig": "workspace:*",
-        "cytoscape": "^3.30.4",
-        "cytoscape-cose-bilkent": "^4.1.0",
-        "dayjs": "^1.11.13",
-        "debug": "^4.3.7",
-        "eslint": "^9.13.0",
-        "mermaid": "^10.9.1",
-        "prettier": "^3.0.3",
-        "turbo": "^1.10.14",
-        "typescript": "^5.5.4",
-        "vitepress": "^1.5.0",
-        "vitepress-plugin-mermaid": "^2.0.17"
-    },
-    "packageManager": "pnpm@8.15.6",
-    "workspaces": [
-        "apps/*",
-        "packages/*",
-        "ndk",
-        "ndk-cache-dexie",
-        "ndk-cache-redis", 
-        "ndk-cache-nostr",
-        "ndk-svelte",
-        "ndk-svelte-components",
-        "ndk-wallet"
-    ],
-    "engines": {
-        "node": ">=16.0"
+  "private": true,
+  "name": "olas",
+  "scripts": {
+    "dev": "turbo dev",
+    "dev:mobile": "turbo dev --filter=\"{./apps/mobile}...\"",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "build": "turbo build",
+    "build:mobile": "turbo build --filter=\"...{./apps/mobile}\""
+  },
+  "devDependencies": {
+    "turbo": "^1.10.7",
+    "typescript": "^4.9.5"
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "@babel/*",
+        "expo-modules-*",
+        "typescript"
+      ]
     }
+  },
+  "prettier": {
+    "printWidth": 100,
+    "tabWidth": 4,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/eslint-config",
+    "packages/ndk/ndk",
+    "packages/ndk/ndk-wallet",
+    "packages/ndk/ndk-mobile",
+    "packages/ndk/packages/eslint-config-custom",
+    "packages/ndk/packages/tsconfig"
+  ]
 }
