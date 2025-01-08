@@ -36,8 +36,7 @@
           },
           "imageWidth": 200,
           "ios": {
-            // You may want to use regular full screen splash on iOS 
-            "image": "./assets/splash.png", // Full screen transparent splash png
+            "image": "./assets/splash.png",
             "enableFullScreenImage_legacy": true,
             "resizeMode": "contain"
           }
@@ -78,14 +77,14 @@
         "android.permission.MODIFY_AUDIO_SETTINGS"
       ]
     },
-    "owner": "sanityisland",
     "extra": {
       "router": {
         "origin": false
       },
       "eas": {
-        "projectId": "d61f508c-f0c5-4c13-b1ce-77c5972ee63d"
+        "projectId": "b55aaba6-0b53-4911-9f5d-4e65d4511fc0"
       }
     }
   }
 }
+
