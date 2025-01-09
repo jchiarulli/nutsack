@@ -1,0 +1,6 @@
+honeypot:
+  android:
+    name: Honeypot
+    description: A freedom wallet for the relays
+    repository: https://github.com/pablof7z/nutsack
+    license: MIT
