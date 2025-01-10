@@ -991,24 +991,6 @@ importers:
         specifier: ^7.2.0
         version: 7.3.0(postcss@8.4.49)(ts-node@10.9.2(@types/node@18.19.64)(typescript@5.6.3))(typescript@5.6.3)
 
-  packages/ndk/packages/eslint-config:
-    dependencies:
-      '@typescript-eslint/eslint-plugin':
-        specifier: ^5.62.0
-        version: 5.62.0(@typescript-eslint/parser@5.62.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1)(typescript@5.7.2)
-      '@typescript-eslint/parser':
-        specifier: ^5.62.0
-        version: 5.62.0(eslint@8.57.1)(typescript@5.7.2)
-      eslint:
-        specifier: ^8.57.0
-        version: 8.57.1
-      eslint-config-universe:
-        specifier: ^12.1.0
-        version: 12.1.0(@types/eslint@8.56.12)(eslint@8.57.1)(prettier@3.3.3)(typescript@5.7.2)
-      prettier:
-        specifier: ^3.2.5
-        version: 3.3.3
-
   packages/ndk/packages/eslint-config-custom:
     dependencies:
       '@typescript-eslint/eslint-plugin':

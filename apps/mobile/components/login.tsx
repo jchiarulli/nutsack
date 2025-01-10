@@ -79,6 +79,95 @@ export default function LoginComponent({ textClassName }: { textClassName?: stri
         }
     };
 
+    const handleNip04EncryptWithAmber = async () => {
+        if (!ndk) return;
+        try {
+            const value = 'NIP-04 encrypt test';
+            const recipient = ndk.getUser({
+                pubkey: '6e1da7cbe39f7e5167aa400c2408cba568aadd4116a9318563f262179eb66bed',
+            });
+
+            const nip55signer = new NDKNip55Signer();
+            const response = await nip55signer.nip04Encrypt(recipient, value);
+            console.log('NIP-55 nip04 encrypt response', response);
+        } catch (error) {
+            if (error.message === 'Canceled') {
+                console.log(error.message || 'Canceled');
+            } else if (error.message === 'Unsupported result code') {
+                Alert.alert(error.message || 'Unsupported result code');
+            } else {
+                Alert.alert('Error', error.message || 'An error occurred during NIP-04 encryption');
+            }
+        }
+    };
+
+    const handleNip04DecryptWithAmber = async () => {
+        if (!ndk) return;
+        try {
+            const value = 'UayX6AnMJ9dC/rxnlhZSqIB4bVANC2+6+miFYL9CUGg=?iv=Ye2wdBG7gdyf0nJ26wyknw==';
+            const sender = ndk.getUser({
+                pubkey: '05e18fba840d9027837736ff26ceaf906f9df112abc91832329c0d062048693a',
+            });
+
+            const nip55signer = new NDKNip55Signer();
+            const response = await nip55signer.nip04Decrypt(sender, value);
+            console.log('NIP-55 nip04 decrypt response', response);
+        } catch (error) {
+            if (error.message === 'Canceled') {
+                console.log(error.message || 'Canceled');
+            } else if (error.message === 'Unsupported result code') {
+                Alert.alert(error.message || 'Unsupported result code');
+            } else {
+                Alert.alert('Error', error.message || 'An error occurred during NIP-04 decryption');
+            }
+        }
+    };
+
+    const handleNip44EncryptWithAmber = async () => {
+        if (!ndk) return;
+        try {
+            const value = 'NIP-44 encrypt test';
+            const recipient = ndk.getUser({
+                pubkey: '6e1da7cbe39f7e5167aa400c2408cba568aadd4116a9318563f262179eb66bed',
+            });
+
+            const nip55signer = new NDKNip55Signer();
+            const response = await nip55signer.nip44Encrypt(recipient, value);
+            console.log('NIP-55 nip44 encrypt response', response);
+        } catch (error) {
+            if (error.message === 'Canceled') {
+                console.log(error.message || 'Canceled');
+            } else if (error.message === 'Unsupported result code') {
+                Alert.alert(error.message || 'Unsupported result code');
+            } else {
+                Alert.alert('Error', error.message || 'An error occurred during NIP-44 encryption');
+            }
+        }
+    };
+
+    const handleNip44DecryptWithAmber = async () => {
+        if (!ndk) return;
+        try {
+            const value =
+                'AjgSPTviCXcDVYP7iI300XxYf/tbYsuStKzuyAl9APdI61F/4Pyt6wARnvlX0kltcBSJ+pM+GjctlPfFoz7EMMFrA6t7O9QX0dd+H0lHuMIqvV3s92cjn5jueEHduTY+QdIr';
+            const sender = ndk.getUser({
+                pubkey: '05e18fba840d9027837736ff26ceaf906f9df112abc91832329c0d062048693a',
+            });
+
+            const nip55signer = new NDKNip55Signer();
+            const response = await nip55signer.nip04Decrypt(sender, value);
+            console.log('NIP-55 nip44 decrypt response', response);
+        } catch (error) {
+            if (error.message === 'Canceled') {
+                console.log(error.message || 'Canceled');
+            } else if (error.message === 'Unsupported result code') {
+                Alert.alert(error.message || 'Unsupported result code');
+            } else {
+                Alert.alert('Error', error.message || 'An error occurred during NIP-44 decryption');
+            }
+        }
+    };
+
     const createAccount = async () => {
         setState('loading');
         const signer = NDKPrivateKeySigner.generate();
@@ -168,6 +257,22 @@ export default function LoginComponent({ textClassName }: { textClassName?: stri
 
                     <Button variant="accent" size={Platform.select({ ios: 'lg', default: 'md' })} onPress={handleSignWithAmber}>
                         <Text>Sign with Amber</Text>
+                    </Button>
+
+                    <Button variant="accent" size={Platform.select({ ios: 'lg', default: 'md' })} onPress={handleNip04EncryptWithAmber}>
+                        <Text>NIP-04 Encrypt with Amber</Text>
+                    </Button>
+
+                    <Button variant="accent" size={Platform.select({ ios: 'lg', default: 'md' })} onPress={handleNip04DecryptWithAmber}>
+                        <Text>NIP-04 Decrypt with Amber</Text>
+                    </Button>
+
+                    <Button variant="accent" size={Platform.select({ ios: 'lg', default: 'md' })} onPress={handleNip44EncryptWithAmber}>
+                        <Text>NIP-44 Encrypt with Amber</Text>
+                    </Button>
+
+                    <Button variant="accent" size={Platform.select({ ios: 'lg', default: 'md' })} onPress={handleNip44DecryptWithAmber}>
+                        <Text>NIP-44 Decrypt with Amber</Text>
                     </Button>
 
                     <Button variant="plain" onPress={createAccount} state={state}>
