@@ -23,7 +23,7 @@ import { myFollows } from '@/utils/myfollows';
 export default function LoginComponent({ textClassName }: { textClassName?: string }) {
     const [payload, setPayload] = useState<string | undefined>(undefined);
     const { ndk, login } = useNDK();
-    const [state, setState] = useState<ButtonState>("idle");
+    const [state, setState] = useState<ButtonState>('idle');
 
     const handleLogin = async () => {
         if (!ndk) return;
@@ -35,49 +35,79 @@ export default function LoginComponent({ textClassName }: { textClassName?: stri
     };
 
     const handleLoginWithAmber = async () => {
+        if (!ndk) return;
         try {
             const nip55signer = new NDKNip55Signer();
             const response = await nip55signer.blockUntilReady();
             console.log('NIP-55 response', response);
+            // await loginWithPayload(payload, { save: true });
         } catch (error) {
-            Alert.alert('Error', error.message || 'An error occurred during login');
+            if (error.message === 'Canceled') {
+                console.log(error.message || 'Canceled');
+            } else if (error.message === 'Unsupported result code') {
+                Alert.alert(error.message || 'Unsupported result code');
+            } else {
+                Alert.alert('Error', error.message || 'An error occurred during login');
+            }
         }
+    };
 
-        // if (!ndk) return;
-        // try {
-        //     await loginWithPayload(payload, { save: true });
-        // }
+    const handleSignWithAmber = async () => {
+        if (!ndk) return;
+        try {
+            const event = {
+                kind: 1,
+                id: 'dfff85948609ae814c897f9fd2a66d271cd9f524f287b28ecd7acd835c60dce3',
+                pubkey: '05e18fba840d9027837736ff26ceaf906f9df112abc91832329c0d062048693a',
+                created_at: 1736476460,
+                tags: [],
+                content: 'hello from the nostr army knife',
+                sig: '9b3dbb14620c1339164618b17e43c1bf74f40678d0fb19389dbdb3fddf6eb49b4998ae28bffb662f51d6252bcbe63d529c15e56041ee42f3b496e471bade37ae',
+            };
+
+            const nip55signer = new NDKNip55Signer();
+            const response = await nip55signer.sign(event);
+            console.log('NIP-55 sign response', response);
+        } catch (error) {
+            if (error.message === 'Canceled') {
+                console.log(error.message || 'Canceled');
+            } else if (error.message === 'Unsupported result code') {
+                Alert.alert(error.message || 'Unsupported result code');
+            } else {
+                Alert.alert('Error', error.message || 'An error occurred during signing');
+            }
+        }
     };
 
     const createAccount = async () => {
-        setState("loading");
+        setState('loading');
         const signer = NDKPrivateKeySigner.generate();
         const nsec = nip19.nsecEncode(signer._privateKey!);
         const user = await signer.user();
 
         const kind0 = new NDKEvent(ndk, {
-            kind: 0, content: JSON.stringify({
+            kind: 0,
+            content: JSON.stringify({
                 name: 'Hello, Honeypot',
                 about: 'A new user trying out Honeypot',
-                picture: 'https://kawaii-avatar.now.sh/api/avatar?username=' + user.pubkey
-
-            })
+                picture: 'https://kawaii-avatar.now.sh/api/avatar?username=' + user.pubkey,
+            }),
         } as NostrEvent);
         await kind0.sign(signer);
-        console.log("kind0 signed");
+        console.log('kind0 signed');
         await kind0.publish();
-        console.log("kind0 published");
+        console.log('kind0 published');
         try {
-            const kind3 = new NDKEvent(ndk, { kind: 3, tags: myFollows.map(f => ['p', f]) } as NostrEvent);
+            const kind3 = new NDKEvent(ndk, { kind: 3, tags: myFollows.map((f) => ['p', f]) } as NostrEvent);
             await kind3.sign(signer);
             await kind3.publish();
         } catch (e) {
-            console.log("failed to publish kind3", e);
-            setState("error");
+            console.log('failed to publish kind3', e);
+            setState('error');
         }
-        
-        await login(nsec)
-        setState("success");
+
+        await login(nsec);
+        setState('success');
     };
 
     const [scanQR, setScanQR] = useState(false);
@@ -134,6 +164,10 @@ export default function LoginComponent({ textClassName }: { textClassName?: stri
 
                     <Button variant="accent" size={Platform.select({ ios: 'lg', default: 'md' })} onPress={handleLoginWithAmber}>
                         <Text>Login with Amber</Text>
+                    </Button>
+
+                    <Button variant="accent" size={Platform.select({ ios: 'lg', default: 'md' })} onPress={handleSignWithAmber}>
+                        <Text>Sign with Amber</Text>
                     </Button>
 
                     <Button variant="plain" onPress={createAccount} state={state}>
